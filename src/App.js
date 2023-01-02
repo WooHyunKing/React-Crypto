@@ -20,14 +20,26 @@ const Circle = styled(Box)`
   border-radius: 50px;
 `;
 
+const Btn = styled.button`
+  color: white;
+  background-color: tomato;
+  border: 0;
+  border-radius: 15px;
+`;
+
+const Input = styled.input.attrs({ required: true })`
+  background-color: tomato;
+`;
+
 // 구현 영역
 
 function App() {
   return (
     <Father>
-      <Box bgColor="teal" />
-      <Box bgColor="tomato" />
-      <Circle bgColor="black" />
+      <Input />
+      <Input />
+      <Input />
+      <Input />
     </Father>
   );
 }
