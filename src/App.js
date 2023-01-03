@@ -33,6 +33,8 @@ const Input = styled.input.attrs({ required: true })`
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Animation = keyframes`
@@ -49,6 +51,10 @@ const Animation = keyframes`
   }
 `;
 
+const Emoji = styled.span`
+  font-size: 36px;
+`;
+
 const Box2 = styled.div`
   height: 200px;
   width: 200px;
@@ -57,20 +63,15 @@ const Box2 = styled.div`
   justify-content: center;
   align-items: center;
   animation: ${Animation} 1s linear infinite;
-  span {
+  ${Emoji} {
     font-size: 50px;
     &:hover {
       font-size: 100px;
     }
-    /* span:hover{
-      font-size: 100px;
-    } */
+
     &:active {
       opacity: 0;
     }
-    /* span:active{
-      opacity: 0;
-    } */
   }
 `;
 
@@ -80,8 +81,9 @@ function App() {
   return (
     <Wrapper>
       <Box2>
-        <span>🤩</span>
+        <Emoji as="p">🤩</Emoji>
       </Box2>
+      <Emoji>🤬</Emoji>
     </Wrapper>
   );
 }
