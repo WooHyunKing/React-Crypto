@@ -6,6 +6,7 @@ import {
   useParams,
   useRouteMatch,
 } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import axios from "axios";
 import Chart from "./Chart";
@@ -174,7 +175,10 @@ function Coin() {
   );
   const { isLoading: priceLoading, data: priceData } = useQuery<PriceData>(
     ["price", coinId],
-    () => getPrice(coinId)
+    () => getPrice(coinId),
+    {
+      refetchInterval: 5000,
+    }
   );
   // 리액트 쿼리는 Query를 배열로 보고 있으므로 고유한 key로 구분하기 위해 배열로 만들어서 구분지어준다 !
 
@@ -182,6 +186,11 @@ function Coin() {
 
   return (
     <Container>
+      <Helmet>
+        <title>
+          {state?.name ? state?.name : loading ? "Loading ..." : infoData?.name}
+        </title>
+      </Helmet>
       <Header>
         <Title>
           {state?.name ? state?.name : loading ? "Loading ..." : infoData?.name}
@@ -201,8 +210,8 @@ function Coin() {
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Open Source:</span>
-              <span>{infoData?.open_source ? "Yes" : "No"}</span>
+              <span>Price:</span>
+              <span>{priceData?.quotes.USD.price.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { fetchCoins } from "../api";
 import { useQuery } from "react-query";
+import { Helmet } from "react-helmet";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -70,6 +71,9 @@ function Coins() {
 
   return (
     <Container>
+      <Helmet>
+        <title>Coins Data</title>
+      </Helmet>
       <Header>
         <Title>Coins Data</Title>
       </Header>
