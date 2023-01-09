@@ -19,6 +19,7 @@ const Container = styled.div`
   padding: 0px 20px;
   max-width: 480px;
   margin: 0 auto;
+  background-color: ${(props) => props.theme.bgColor};
 `;
 
 const Header = styled.header`
@@ -57,10 +58,15 @@ const OverviewItem = styled.div`
     text-transform: uppercase;
     margin-bottom: 5px;
   }
+
+  span {
+    color: ${(props) => props.theme.cardBgColor};
+  }
 `;
 
 const Description = styled.p`
   margin: 20px 0px;
+  color: ${(props) => props.theme.cardBgColor};
 `;
 
 const Tabs = styled.div`
@@ -79,7 +85,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   padding: 7px 0px;
   border-radius: 10px;
   color: ${(props) =>
-    props.isActive ? props.theme.accentColor : props.theme.textColor};
+    props.isActive ? props.theme.accentColor : props.theme.cardBgColor};
   a {
     display: block;
   }
@@ -211,7 +217,7 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>{priceData?.quotes.USD.price.toFixed(3)}</span>
+              <span>{priceData?.quotes?.USD?.price?.toFixed(3)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>

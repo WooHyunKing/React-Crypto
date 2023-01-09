@@ -5,6 +5,8 @@ import axios from "axios";
 import { fetchCoins } from "../api";
 import { useQuery } from "react-query";
 import { Helmet } from "react-helmet";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -22,10 +24,11 @@ const Header = styled.header`
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 10px;
+  border: 1px solid white;
   a {
     display: flex;
     align-items: center;
@@ -68,6 +71,8 @@ interface ICoin {
 
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
+  const setIsDark = useSetRecoilState(isDarkAtom);
+  const toggleDark = () => setIsDark((prev) => !prev);
 
   return (
     <Container>
@@ -76,6 +81,7 @@ function Coins() {
       </Helmet>
       <Header>
         <Title>Coins Data</Title>
+        <button onClick={toggleDark}>Toggle</button>
       </Header>
       {isLoading ? (
         <Loader>Loading ...</Loader>
